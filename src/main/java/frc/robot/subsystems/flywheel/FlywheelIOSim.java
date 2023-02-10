@@ -16,9 +16,8 @@ public class FlywheelIOSim implements FlywheelIO {
   @Override
   public void updateInputs(FlywheelIOInputs inputs) {
     if (closedLoop) {
-      appliedVolts = MathUtil.clamp(
-          pid.calculate(sim.getAngularVelocityRadPerSec()) + ffVolts, -12.0,
-          12.0);
+      appliedVolts =
+          MathUtil.clamp(pid.calculate(sim.getAngularVelocityRadPerSec()) + ffVolts, -12.0, 12.0);
       sim.setInputVoltage(appliedVolts);
     }
 
@@ -27,7 +26,7 @@ public class FlywheelIOSim implements FlywheelIO {
     inputs.positionRad = 0.0;
     inputs.velocityRadPerSec = sim.getAngularVelocityRadPerSec();
     inputs.appliedVolts = appliedVolts;
-    inputs.currentAmps = new double[] { sim.getCurrentDrawAmps() };
+    inputs.currentAmps = new double[] {sim.getCurrentDrawAmps()};
   }
 
   @Override

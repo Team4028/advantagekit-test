@@ -1,12 +1,11 @@
 package frc.robot.subsystems.flywheel;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 import com.revrobotics.SparkMaxPIDController.ArbFFUnits;
-
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotController;
 
@@ -41,18 +40,20 @@ public class FlywheelIOSparkMax implements FlywheelIO {
   @Override
   public void updateInputs(FlywheelIOInputs inputs) {
     inputs.positionRad = Units.rotationsToRadians(encoder.getPosition() / GEAR_RATIO);
-    inputs.velocityRadPerSec = Units.rotationsPerMinuteToRadiansPerSecond(
-        encoder.getVelocity() / GEAR_RATIO);
+    inputs.velocityRadPerSec =
+        Units.rotationsPerMinuteToRadiansPerSecond(encoder.getVelocity() / GEAR_RATIO);
     inputs.appliedVolts = leader.getAppliedOutput() * RobotController.getBatteryVoltage();
-    inputs.currentAmps = new double[] { leader.getOutputCurrent(), follower.getOutputCurrent() };
+    inputs.currentAmps = new double[] {leader.getOutputCurrent(), follower.getOutputCurrent()};
   }
 
   @Override
   public void setVelocity(double velocityRadPerSec, double ffVolts) {
     pid.setReference(
-        Units.radiansPerSecondToRotationsPerMinute(velocityRadPerSec)
-            * GEAR_RATIO,
-        ControlType.kVelocity, 0, ffVolts, ArbFFUnits.kVoltage);
+        Units.radiansPerSecondToRotationsPerMinute(velocityRadPerSec) * GEAR_RATIO,
+        ControlType.kVelocity,
+        0,
+        ffVolts,
+        ArbFFUnits.kVoltage);
   }
 
   @Override

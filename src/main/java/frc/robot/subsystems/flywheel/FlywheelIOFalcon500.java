@@ -6,7 +6,6 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
-
 import edu.wpi.first.math.util.Units;
 
 public class FlywheelIOFalcon500 implements FlywheelIO {
@@ -34,21 +33,21 @@ public class FlywheelIOFalcon500 implements FlywheelIO {
 
   @Override
   public void updateInputs(FlywheelIOInputs inputs) {
-    inputs.positionRad = Units.rotationsToRadians(
-        leader.getSelectedSensorPosition() / TICKS_PER_REV / GEAR_RATIO);
-    inputs.velocityRadPerSec = Units.rotationsPerMinuteToRadiansPerSecond(
-        leader.getSelectedSensorVelocity() * 10 / TICKS_PER_REV / GEAR_RATIO);
+    inputs.positionRad =
+        Units.rotationsToRadians(leader.getSelectedSensorPosition() / TICKS_PER_REV / GEAR_RATIO);
+    inputs.velocityRadPerSec =
+        Units.rotationsPerMinuteToRadiansPerSecond(
+            leader.getSelectedSensorVelocity() * 10 / TICKS_PER_REV / GEAR_RATIO);
     inputs.appliedVolts = leader.getMotorOutputVoltage();
-    inputs.currentAmps = new double[] { leader.getSupplyCurrent(),
-        follower.getSupplyCurrent() };
+    inputs.currentAmps = new double[] {leader.getSupplyCurrent(), follower.getSupplyCurrent()};
   }
 
   @Override
   public void setVelocity(double velocityRadPerSec, double ffVolts) {
-    double velocityFalconUnits = Units.radiansToRotations(velocityRadPerSec)
-        * GEAR_RATIO * TICKS_PER_REV / 10.0;
-    leader.set(ControlMode.Velocity, velocityFalconUnits,
-        DemandType.ArbitraryFeedForward, ffVolts / 12.0);
+    double velocityFalconUnits =
+        Units.radiansToRotations(velocityRadPerSec) * GEAR_RATIO * TICKS_PER_REV / 10.0;
+    leader.set(
+        ControlMode.Velocity, velocityFalconUnits, DemandType.ArbitraryFeedForward, ffVolts / 12.0);
   }
 
   @Override

@@ -1,20 +1,20 @@
 package frc.robot.subsystems.drive;
 
-import org.littletonrobotics.junction.Logger;
-
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import org.littletonrobotics.junction.Logger;
 
 public class Drive extends SubsystemBase {
   public static final double WHEEL_RADIUS_METERS = Units.inchesToMeters(3.0);
 
   private final DriveIO io;
   private final DriveIOInputsAutoLogged inputs = new DriveIOInputsAutoLogged();
-  private final DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(new Rotation2d(), 0.0, 0.0);
+  private final DifferentialDriveOdometry odometry =
+      new DifferentialDriveOdometry(new Rotation2d(), 0.0, 0.0);
 
   /** Creates a new Drive. */
   public Drive(DriveIO io) {
@@ -27,7 +27,8 @@ public class Drive extends SubsystemBase {
     Logger.getInstance().processInputs("Drive", inputs);
 
     // Update odometry and log the new pose
-    odometry.update(new Rotation2d(-inputs.gyroYawRad), getLeftPositionMeters(), getRightPositionMeters());
+    odometry.update(
+        new Rotation2d(-inputs.gyroYawRad), getLeftPositionMeters(), getRightPositionMeters());
     Logger.getInstance().recordOutput("Odometry", getPose());
   }
 

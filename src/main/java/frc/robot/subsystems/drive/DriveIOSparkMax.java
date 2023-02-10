@@ -2,9 +2,8 @@ package frc.robot.subsystems.drive;
 
 import com.ctre.phoenix.sensors.Pigeon2;
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import com.revrobotics.RelativeEncoder;
 import edu.wpi.first.math.util.Units;
 
 public class DriveIOSparkMax implements DriveIO {
@@ -55,10 +54,10 @@ public class DriveIOSparkMax implements DriveIO {
   public void updateInputs(DriveIOInputs inputs) {
     inputs.leftPositionRad = Units.rotationsToRadians(leftEncoder.getPosition() / GEAR_RATIO);
     inputs.rightPositionRad = Units.rotationsToRadians(rightEncoder.getPosition() / GEAR_RATIO);
-    inputs.leftVelocityRadPerSec = Units.rotationsPerMinuteToRadiansPerSecond(
-        leftEncoder.getVelocity() / GEAR_RATIO);
-    inputs.rightVelocityRadPerSec = Units.rotationsPerMinuteToRadiansPerSecond(
-        rightEncoder.getVelocity() / GEAR_RATIO);
+    inputs.leftVelocityRadPerSec =
+        Units.rotationsPerMinuteToRadiansPerSecond(leftEncoder.getVelocity() / GEAR_RATIO);
+    inputs.rightVelocityRadPerSec =
+        Units.rotationsPerMinuteToRadiansPerSecond(rightEncoder.getVelocity() / GEAR_RATIO);
     inputs.gyroYawRad = gyro.getYaw();
   }
 

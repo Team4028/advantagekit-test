@@ -5,7 +5,6 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.TalonFXConfiguration;
 import com.ctre.phoenix.sensors.Pigeon2;
-
 import edu.wpi.first.math.util.Units;
 
 public class DriveIOFalcon500 implements DriveIO {
@@ -44,14 +43,18 @@ public class DriveIOFalcon500 implements DriveIO {
 
   @Override
   public void updateInputs(DriveIOInputs inputs) {
-    inputs.leftPositionRad = Units.rotationsToRadians(
-        leftLeader.getSelectedSensorPosition() / TICKS_PER_REV / GEAR_RATIO);
-    inputs.rightPositionRad = Units.rotationsToRadians(
-        rightLeader.getSelectedSensorPosition() / TICKS_PER_REV / GEAR_RATIO);
-    inputs.leftVelocityRadPerSec = Units.rotationsPerMinuteToRadiansPerSecond(
-        leftLeader.getSelectedSensorVelocity() * 10 / TICKS_PER_REV / GEAR_RATIO);
-    inputs.rightVelocityRadPerSec = Units.rotationsPerMinuteToRadiansPerSecond(
-        rightLeader.getSelectedSensorVelocity() * 10 / TICKS_PER_REV / GEAR_RATIO);
+    inputs.leftPositionRad =
+        Units.rotationsToRadians(
+            leftLeader.getSelectedSensorPosition() / TICKS_PER_REV / GEAR_RATIO);
+    inputs.rightPositionRad =
+        Units.rotationsToRadians(
+            rightLeader.getSelectedSensorPosition() / TICKS_PER_REV / GEAR_RATIO);
+    inputs.leftVelocityRadPerSec =
+        Units.rotationsPerMinuteToRadiansPerSecond(
+            leftLeader.getSelectedSensorVelocity() * 10 / TICKS_PER_REV / GEAR_RATIO);
+    inputs.rightVelocityRadPerSec =
+        Units.rotationsPerMinuteToRadiansPerSecond(
+            rightLeader.getSelectedSensorVelocity() * 10 / TICKS_PER_REV / GEAR_RATIO);
     inputs.gyroYawRad = gyro.getYaw();
   }
 

@@ -2,22 +2,19 @@
 // // Open Source Software; you can modify and/or share it under the terms of
 // // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.Motor;
+package frc.robot.subsystems.motor;
 
-import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.Motor.TurretIO.TurretIOInputs;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
-
+import frc.robot.subsystems.Motor.TurretIO.TurretIOInputs;
 
 public class TurretIOSim implements TurretIO {
-    private DCMotorSim sim = new DCMotorSim(DCMotor.getNEO(1), 1.5, 0.004);
-  
+  private DCMotorSim sim = new DCMotorSim(DCMotor.getNEO(1), 1.5, 0.004);
+
   private boolean closedLoop = false;
   private double ffVolts = 0.0;
   private double appliedVolts = 0.0;
-  
+
   @Override
   public void updateInputs(TurretIOInputs inputs) {
     if (closedLoop) {
@@ -29,7 +26,7 @@ public class TurretIOSim implements TurretIO {
     inputs.positionRad = 0.0;
     inputs.velocityRadPerSec = sim.getAngularVelocityRadPerSec();
     inputs.appliedVolts = appliedVolts;
-    inputs.currentAmps = new double[] { sim.getCurrentDrawAmps() };
+    inputs.currentAmps = new double[] {sim.getCurrentDrawAmps()};
   }
 
   @Override

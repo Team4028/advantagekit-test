@@ -1,11 +1,10 @@
 package frc.robot.subsystems.Motor;
 
-import java.lang.Cloneable;
-import java.lang.Override;
 import org.littletonrobotics.junction.LogTable;
 import org.littletonrobotics.junction.inputs.LoggableInputs;
 
-public class TurretIOInputsAutoLogged extends TurretIO.TurretIOInputs implements LoggableInputs, Cloneable {
+public class TurretIOInputsAutoLogged extends TurretIO.TurretIOInputs
+    implements LoggableInputs, Cloneable {
   @Override
   public void toLog(LogTable table) {
     table.put("PositionRad", positionRad);

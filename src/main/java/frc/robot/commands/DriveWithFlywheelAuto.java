@@ -12,12 +12,13 @@ public class DriveWithFlywheelAuto extends SequentialCommandGroup {
   private static final double flywheelDuration = 10.0;
 
   /**
-   * Creates a new DriveWithFlywheelAuto, which drives forward for three seconds
-   * and then runs the flywheel for ten seconds.
+   * Creates a new DriveWithFlywheelAuto, which drives forward for three seconds and then runs the
+   * flywheel for ten seconds.
    */
   public DriveWithFlywheelAuto(Drive drive, Flywheel flywheel) {
     addCommands(
-        new StartEndCommand(() -> drive.drivePercent(drivePercent, -drivePercent), drive::stop, drive)
+        new StartEndCommand(
+                () -> drive.drivePercent(drivePercent, -drivePercent), drive::stop, drive)
             .withTimeout(driveDuration),
         new StartEndCommand(() -> flywheel.runVelocity(flywheelSpeed), flywheel::stop, flywheel)
             .withTimeout(flywheelDuration));
