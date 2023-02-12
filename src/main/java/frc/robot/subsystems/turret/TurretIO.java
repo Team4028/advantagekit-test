@@ -7,19 +7,23 @@ package frc.robot.subsystems.turret;
 import org.littletonrobotics.junction.AutoLog;
 
 public interface TurretIO {
-  @AutoLog
-  public static class TurretIOInputs {
-    public double positionRad = 0.0;
-    public double velocityRadPerSec = 0.0;
-    public double appliedVolts = 0.0;
-    public double[] currentAmps = new double[] {};
-  }
+    @AutoLog
+    public static class TurretIOInputs {
+        public double positionRad = 0.0;
+        public double velocityRadPerSec = 0.0;
+        public double appliedVolts = 0.0;
+        public double currentAmps = 0.0;
+    }
 
-  public default void updateInputs(TurretIOInputs inputs) {}
+    public default void updateInputs(TurretIOInputs inputs) {
+    }
 
-  public default void setVelocity(double velocityRadPerSec, double ffVolts) {}
+    public default void setVelocity(double velocityRadPerSec, double ffVolts) {
+    }
 
-  public default void stop() {}
+    public default void stop() {
+    }
 
-  public default void setVoltage(double volts) {}
+    public default void setVoltage(double volts) {
+    }
 }
